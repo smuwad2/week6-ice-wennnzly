@@ -4,9 +4,8 @@
             return {
                 // Add code here
                 id : "demo1",
-                isBlue : true,
-                color : "blueBox",
-                button : "btn-primary"
+                blueBox : true,
+                blueBtn : true
             }
         },
         methods: { 
