@@ -13,8 +13,35 @@ export default {
         }
     },
     
+    computed: {
+        currentTheme() {
+            return this.themes[this.currentThemeIndex];
+        },
+
+        currentBgColor() {
+            switch(this.currentTheme) {
+                case 'dark': return '#333';
+                case 'light': return '#fff';
+                case 'neon': return '#39ff14';
+                default: return '#f5f5f5';
+            }
+        },
+        
+        currentTextColor() {
+            switch(this.currentTheme) {
+                case 'dark': return '#fff';
+                case 'light': return '#000';
+                case 'neon': return '#000';
+                default: return '#333';
+            }
+        }
+    },
+
     methods: {
         // Add code here
+        cycleTheme() {
+            this.currentThemeIndex = (this.currentThemeIndex + 1) % this.themes.length;
+        }
 
     }
 }
@@ -39,7 +66,7 @@ export default {
             <input id="imageUrl" v-model="imageUrl" placeholder="https://example.com/me.jpg"><br><br>
 
             <label>Theme Presets:</label><br>
-            <button class="theme-button">Cycle theme</button> <!-- click button to cycle through the themes -->
+            <button class="theme-button" v-on:click="cycleTheme()">Cycle theme</button> <!-- click button to cycle through the themes -->
             <!-- Dark theme: background-color: #333, text-color: #fff -->
             <!-- Light theme: background-color: #fff, text-color: #000  -->
             <!-- Neon theme: background-color: #39ff14, text-color: #000 -->
@@ -48,7 +75,8 @@ export default {
         <!-- Preview Section -->
         <div class="preview-section">
             <h2>Live Preview</h2>
-            <div class="preview-card"> <!-- Add code here to set background color and text color -->
+            <div class="preview-card" v-on:click="cycleTheme()" 
+            :style="{ backgroundColor: currentBgColor, color: currentTextColor }"> <!-- Add code here to set background color and text color -->
                 <img :src="imageUrl" class="preview-img">
                 <h3>{{ name || 'Your Name' }}</h3>
                 <h4>{{ job || 'Job Title' }}</h4>
