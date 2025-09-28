@@ -27,7 +27,9 @@
 
             changeColor(){
                 this.blueBox=!this.blueBox;
-                this.redBox=!this.bl
+                this.redBox=!this.blueBtn;
+                this.blueBtn=!this.blueBtn;
+                
             }
 		}
     }
